@@ -43,8 +43,9 @@
                 {% endif %}
                 button.appendChild(badge);
             {% endfor %}
+            let alert = document.getElementById("alert");
+                alert.style.display = 'block';
             if (wrong){
-                let alert = document.getElementById("alert");
                 alert.classList.remove("alert-success");
                 alert.classList.add("alert-danger");
                 alert.innerText = "Wrong";
@@ -64,13 +65,13 @@
         </div>
     </div>
     <button onclick="check_results()" id="check_button" type="button" class="btn btn-primary btn-md">Check Answers</button>
+    <div class="alert alert-success" id="alert" role="alert" style="display: none">OK</div>
     <div class="container" id="button_container" style="display:none;">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input name="True" id="res" type="text" style="display:none" value="OK">
-        <div class="alert alert-success" id="alert" role="alert">OK</div>
-        <button type="submit" class="btn btn-primary btn-md">{% if has_next %}Next{% else %}View Results{% endif %}</button>
-    </form>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input name="True" id="res" type="text" style="display:none" value="OK">
+            <button type="submit" class="btn btn-primary btn-md">{% if has_next %}Next{% else %}View Results{% endif %}</button>
+        </form>
     </div>
 </div>
 {% endblock %}
