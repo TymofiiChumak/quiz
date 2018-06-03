@@ -1,5 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.template import loader
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import authenticate, login, logout
@@ -18,7 +17,7 @@ def create_user_form(request):
     new_user = User.objects.create_user(username, email, password)
     new_user.save()
     login(request, new_user)
-    return HttpResponsePermanentRedirect('/quiz_list/')
+    return HttpResponsePermanentRedirect('/users_quiz/')
 
 
 def login_user(request):
