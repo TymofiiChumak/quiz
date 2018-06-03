@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="jumbotron">
+        <h3 class="display-4">{{ title }}</h3>
+        <hr class="my-4">
+        <form action="/question/" method="get">
+            <button type="submit" class="btn btn-primary btn-md btn-block">Go!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

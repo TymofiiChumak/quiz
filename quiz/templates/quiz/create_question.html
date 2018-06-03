@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <form action="/create_question_form/" method="post">
+        {%  csrf_token %}
+        <input name="question" type="text" class="form-control" placeholder="Question">
+        {% for i in indexes %}
+        <div class="col-lg-10">
+            <input name="text{{ i }}" type="text" class="form-control" placeholder="Answer #{{ i }}">
+        </div>
+        <div class="col-lg-2">
+            <input name="true{{ i }}" checked data-toggle="toggle" data-on="True" data-off="False" type="checkbox">
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-md btn-block">Create</button>
+    </form>
+    <form action="/successfully_created/" method="get">
+        <button type="submit" class="btn btn-primary btn-md btn-block">End</button>
+    </form>
+</div>
+{% endblock %}

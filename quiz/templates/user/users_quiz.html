@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="row">
+        <div class="col-lg-2">
+        <form action="/create_quiz/" method="get">
+            <button type="submit" class="btn btn-secondary btn-md">Create New</button>
+        </form>
+        </div>
+        <div class="col-lg-2">
+        <form action="/quiz_list/" method="get">
+            <button type="submit" class="btn btn-secondary btn-md">View all</button>
+        </form>
+        </div>
+        <div class="col-lg-1">
+        <form action="/logout/" method="get">
+            <button type="submit" class="btn btn-secondary btn-md">Logout</button>
+        </form>
+        </div>
+    </div>
+    <h3>Welcome {{ user.username }}!</h3>
+        <div class="well">
+        <h3>Your quiz:</h3>
+        {% if list_of_quiz|length > 0 %}
+            <ul class="list-group">
+            {% for quiz in list_of_quiz %}
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3>{{ quiz.title }}</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <form action="/quiz/{{ quiz.id }}" method="get">
+                                <button type="submit" class="btn btn-primary btn-md">Go</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </ul>
+    {% else %}
+        <h4>You don't created any quiz</h4>
+    {% endif %}
+    </div>
+    <div class="well">
+    <h3>Your results:</h3>
+    {% if results|length > 0 %}
+        {% for result in results %}
+            <h4>{{ result.title }}: {{ result.correct }} from {{ result.all_questions }}</h4>
+        {% endfor %}
+    {% else %}
+        <h4>You don't passed any quiz</h4>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

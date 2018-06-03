@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="jumbotron">
+        <h1 class="display-4">Quiz was successfully created</h1>
+        <hr class="my-4">
+        <p>You can view it </p>
+        <form action="/users_quiz/" method="get">
+            <button type="submit" class="btn btn-primary btn-md btn-block">Go to home page</button>
+        </form>
+        <form action="/quiz/{{ quiz_id }}/" method="get">
+            <button type="submit" class="btn btn-primary btn-md btn-block">View created quiz</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

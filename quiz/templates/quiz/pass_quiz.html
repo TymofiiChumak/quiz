@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <script>
+        function check(id) {
+            let button = document.getElementById(id);
+            button.classList.add("list-group-item-info");
+            button.setAttribute("disabled", "disabled");
+        }
+
+        function check_results() {
+            let button;
+            let badge;
+            let wrong = false;
+            {% for answer in answers %}
+                button = document.getElementById({{ answer.id }});
+                button.setAttribute("disabled", "disabled");
+                badge = document.createElement('div');
+                badge.className += "badge";
+                {%  if answer.correct %}
+                    if (button.classList.contains("list-group-item-info")){
+                        button.classList.remove("list-group-item-info");
+                        badge.classList.add("badge-success");
+                        badge.innerHTML = "OK";
+                    }else{
+                        badge.classList.add("badge-danger");
+                        badge.innerHTML = "Wrong";
+                        wrong = true;
+                    }
+                    button.classList.add("list-group-item-success");
+                {% else %}
+                    if (button.classList.contains("list-group-item-info")){
+                        button.classList.remove("list-group-item-info");
+                        badge.classList.add("badge-danger");
+                        badge.innerHTML = "Wrong";
+                        wrong = true;
+                    }else{
+                        badge.classList.add("badge-success");
+                        badge.innerHTML = "OK";
+                        button.classList.add("list-group-item-danger");
+                    }
+                    button.classList.add("list-group-item-danger");
+                {% endif %}
+                button.appendChild(badge);
+            {% endfor %}
+            if (wrong){
+                let alert = document.getElementById("alert");
+                alert.classList.remove("alert-success");
+                alert.classList.add("alert-danger");
+                alert.innerText = "Wrong";
+                document.getElementById("res").value = "Wrong";
+            }
+            document.getElementById("check_button").style.display = 'none';
+            document.getElementById("button_container").style.display = 'block';
+        }
+    </script>
+    <div class="jumbotron">
+        <h3>{{ question }}</h3>
+        <div class="list-group">
+        <h4>{{ answers|length }}</h4>
+        {% for answer in answers %}
+            <button onclick="check({{ answer.id }})" id="{{ answer.id }}" type="button" class="list-group-item list-group-item-action">{{ answer.text }}</button>
+        {% endfor %}
+        </div>
+    </div>
+    <button onclick="check_results()" id="check_button" type="button" class="btn btn-primary btn-md">Check Answers</button>
+    <div class="container" id="button_container" style="display:none;">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input name="True" id="res" type="text" style="display:none" value="OK">
+        <div class="alert alert-success" id="alert" role="alert">OK</div>
+        <button type="submit" class="btn btn-primary btn-md">{% if has_next %}Next{% else %}View Results{% endif %}</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

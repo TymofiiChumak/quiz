@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="jumbotron">
+        <h3 class="display-4">Your Result</h3>
+        <h5>for Question: {{ title }}</h5>
+        <hr class="my-4">
+        <h3>{{ correct }} from {{ all }}</h3>
+        <form action="/users_quiz/" method="get">
+            <button type="submit" class="btn btn-primary btn-md btn-block">Go home</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

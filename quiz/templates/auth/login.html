@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form action="/login_form/" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input name="username" type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <button id="login_button" type="submit" class="btn btn-primary btn-md btn-block">Log in</button>
+                        </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <form action="/quiz_list/" method="get">
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Guest</button>
+                    </form>
+                    <form action="/create_user/" method="get">
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Sign in</button>
+                    </form>
+                </div>
+            </div>
+            {% if error %}
+                <div class="alert alert-danger" role="alert">Your username and password didn't match</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
