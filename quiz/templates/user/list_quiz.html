@@ -1,21 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class="well">
-    {% for quiz in list_of_quiz %}
-        <form action="/quiz/{{ quiz.id }}" method="get">
-            <h3>{{ quiz.title }}</h3>
-            <<button type="submit" class="btn btn-primary btn-md">Go</button>
-        </form>
-    {% endfor %}
-    </div>
     {% if not tmp_user.is_anonymous  %}
-    <form action="/create_quiz/" method="get">
-        <button type="submit" class="btn btn-primary btn-md">Create New{{ user }}</button>
-    </form>
-    <form action="/users_quiz/" method="get">
-        <button type="submit" class="btn btn-primary btn-md">Your quiz</button>
-    </form>
+    <div class="row">
+        <div class="col-lg-2">
+            <form action="/create_quiz/" method="get">
+                <button type="submit" class="btn btn-secondary btn-md">Create New</button>
+            </form>
+        </div>
+        <div class="col-lg-2">
+            <form action="/users_quiz/" method="get">
+                <button type="submit" class="btn btn-secondary btn-md">Your quiz</button>
+            </form>
+        </div>
+    </div>
     {% endif %}
+    <div class="well">
+    <ul class="list-group">
+    {% for quiz in list_of_quiz %}
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>{{ quiz.title }}</h3>
+                </div>
+                <div class="col-lg-4">
+                    <form action="/quiz/{{ quiz.id }}" method="get">
+                        <button type="submit" class="btn btn-primary btn-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </ul>
+    </div>
 </div>
 {% endblock %}
