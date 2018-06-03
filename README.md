@@ -1,6 +1,6 @@
-##**A simple site for take a quiz.**
-
-###**Installation:**
+**A simple site for take a quiz.**
+-----
+**Installation:**
 
 install Django:
 ```bash
@@ -28,7 +28,7 @@ python manage.py migrate quiz
 python manage.py makemigrations
 ```
 
-###**Run:**
+**Run:**
 
 For run server on port 8000
 ```bash
